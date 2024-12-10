@@ -175,22 +175,6 @@ for update in updatesUnsafes:
             updateTest[firstUnsafe] = updateTest[lastUnsafe]
             updateTest[lastUnsafe] = numberTemp
 
-from os import system, name
-
-
-# define our clear function
-def clear():
-    # for windows the name is 'nt'
-    if name == 'nt':
-        _ = system('cls')
-
-    # and for mac and linux, the os.name is 'posix'
-    else:
-        _ = system('clear')
-
-# Then, whenever you want to clear the screen, just use this clear function as:
-clear()
-
 print(f"\nRésultat du challenge partie 2 : {resultatChallenge}")
 
 

@@ -24,7 +24,6 @@ else:
     fichier = open("input.txt", "r")
     lignes = fichier.readlines()
 
-import re
 
 # Création d'une variable qui va stocker le résultat du challenge
 resultatChallenge = 0
