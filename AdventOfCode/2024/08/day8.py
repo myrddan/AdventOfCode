@@ -1,11 +1,11 @@
 
 # Les challenges contiennent des données pour comprendre et tester notre algo.
 # Ce boolean sert à faciliter le passage de l'un à l'autre
-useDataTest = True
+useDataTest = False
 
 # Il y a deux niveaux pour les challenges
 # Ce boolean permet d'avoir les deux versions dans le même fichier
-isLvlOne = True
+isLvlOne = False
 
 # Affichage de log supplémentaire pour faciliter le debugage
 verbose = True
@@ -81,10 +81,11 @@ for j in range(len(data[1])):
 
             if not key in dicAntennas.keys():
                 dicAntennas[key] = []
-            # if dicAntennas.get(data[i][j]) is None:
-            #     key = data[i][j]
-            #     dicAntennas[key] == [(i, j)]
+
             dicAntennas.get(data[i][j]).append((i, j))
+
+            if not isLvlOne:
+                resultatChallenge += 1
 
 print(dicAntennas)
 
@@ -92,19 +93,102 @@ print(f" Ajouts des \"antinode \"")
 
 
 for item in dicAntennas.items():
-    if verbose:
-        print(f" Antennes {item[0]} :")
 
-    while len(item[1])> 1:
+    if isLvlOne:
 
-        for i in range(len(item[1])-1):
-            posx = item[1][i][0] - (item[1][i+1][0] - item[1][i][0])
-            posy = item[1][i][1] - (item[1][i+1][1] - item[1][i][1])
+        if verbose:
+            print(f" Antennes {item[0]} :")
 
-            if posx > -1 and posx < (len(data) -1) and posy > -1 and posy < (len(data[0]) -1) and data[posx][posy] == ".":
-                data[posx][posy] = "#"
+        while len(item[1])> 1:
 
-        del item[1][0]
+            for i in range(1,len(item[1])):
+                if verbose:
+                    print("     ",item[1][0],":",item[1][i])
+
+                posx = item[1][0][0] - (item[1][i][0] - item[1][0][0])
+                posy = item[1][0][1] - (item[1][i][1] - item[1][0][1])
+
+                if -1 < posx < len(data) and -1 < posy < len(data[0]):
+                    if not data[posx][posy] == "#":
+                        resultatChallenge += 1
+                    if data[posx][posy] == ".":
+                        data[posx][posy] = "#"
+                    if verbose:
+                        print("       x", posx, "y", posy," IN")
+                elif verbose:
+                    print("       x",posx,"y",posy," OUT")
+
+                posx = item[1][0][0] + 2 * (item[1][i][0] - item[1][0][0])
+                posy = item[1][0][1] + 2 * (item[1][i][1] - item[1][0][1])
+
+
+                if -1 < posx < len(data) and -1 < posy < len(data[0]):
+                    if not data[posx][posy] == "#":
+                        resultatChallenge += 1
+                    if data[posx][posy] == ".":
+                        data[posx][posy] = "#"
+                    if verbose:
+                        print("       x", posx, "y", posy," IN")
+                elif verbose:
+                    print("       x",posx,"y",posy," OUT")
+
+            del item[1][0]
+    else:
+        ###############################################"
+        #  LVL 2
+        if verbose:
+            print(f" Antennes {item[0]} :")
+
+        while len(item[1]) > 1:
+
+            for i in range(1, len(item[1])):
+                if verbose:
+                    print("     ", item[1][0], ":", item[1][i])
+
+                diffx = item[1][i][0] - item[1][0][0]
+                diffy = item[1][i][1] - item[1][0][1]
+
+                mul = 0
+
+                while True:
+                    mul += 1
+
+                    posx = item[1][0][0] - mul * diffx
+                    posy = item[1][0][1] - mul * diffy
+
+                    if -1 < posx < len(data) and -1 < posy < len(data[0]):
+                        if data[posx][posy] == ".":
+                            data[posx][posy] = "#"
+                            resultatChallenge += 1
+                        if verbose:
+                            print("       x", posx, "y", posy, " IN")
+                    elif verbose:
+                        print("       x", posx, "y", posy, " OUT")
+                        break
+
+                mul = 0
+
+                while True:
+                    mul += 1
+
+                    posx = item[1][0][0] - mul * diffx
+                    posy = item[1][0][1] - mul * diffy
+
+                    posx = item[1][0][0] + ( 1 + mul ) * diffx
+                    posy = item[1][0][1] + ( 1 + mul ) * diffy
+
+                    if -1 < posx < len(data) and -1 < posy < len(data[0]):
+                        if data[posx][posy] == ".":
+                            data[posx][posy] = "#"
+                            resultatChallenge += 1
+                        if verbose:
+                            print("       x", posx, "y", posy, " IN")
+                    elif verbose:
+                        print("       x", posx, "y", posy, " OUT")
+                        break
+
+
+            del item[1][0]
 
 # Affiche le tableau
 print("\n Affichage des données : \n")
@@ -112,6 +196,7 @@ for j in range(len(data[1])):
     afficheLigne = ""
     for i in range(len(data)):
         afficheLigne = afficheLigne + data[i][j]
+
     print(afficheLigne)
 
 

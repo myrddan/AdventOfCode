@@ -2,15 +2,14 @@ import copy
 
 # Les challenges contiennent des données pour comprendre et tester notre algo.
 # Ce boolean sert à faciliter le passage de l'un à l'autre
-useDataTest = True
+useDataTest = False
 
 # Il y a deux niveaux pour les challenges
 # Ce boolean permet d'avoir les deux versions dans le même fichier
 isLvlOne = True
 
 # Affichage de log supplémentaire pour faciliter le debugage
-verbose = True
-
+verbose = False
 
 if useDataTest :
     # Utilisation des données test
@@ -142,12 +141,11 @@ def parcoursGuard(posXStart,posYStart,depStart,dataParcours,isRechercheBoucle):
     cptBoucle = 0
 
     cptTours = 0
-    cptX = 0
+
 
     while True:
         cptTours +=1
-        if not isRechercheBoucle:
-            print(f"etape {cptTours}/4602")
+
         try:
             testPosX, testPosY = getNextCase(posX, posY, dep)
 
@@ -158,14 +156,9 @@ def parcoursGuard(posXStart,posYStart,depStart,dataParcours,isRechercheBoucle):
                     print("Changement de direction vers :", dep)
                 testPosX, testPosY = getNextCase(posX, posY, dep)
 
-            if dataParcours[testPosX][testPosY] == "H":
-                cptX += 1
-            else:
-                cptX = 0
-
 
             if isRechercheBoucle:
-                if cptX == 10000 or (dataParcours[testPosX][testPosY] == "O" and dep == depStart and posX == posXStart and posY == posYStart):
+                if dataParcours[testPosX][testPosY] == dep.value:
                     for j in range(len(dataParcours[1])):
                         afficheLigne = ""
                         for i in range(len(dataParcours)):
@@ -182,11 +175,6 @@ def parcoursGuard(posXStart,posYStart,depStart,dataParcours,isRechercheBoucle):
                     cptBoucle += 1
 
 
-            if dataParcours[testPosX][testPosY]  in ["X","H"]:
-                dataParcours[posX][posY]  = "H"
-            else:
-                dataParcours[posX][posY] = "X"
-
             dataParcours[testPosX][testPosY] = dep.value
             posX = testPosX
             posY = testPosY
@@ -199,7 +187,7 @@ def parcoursGuard(posXStart,posYStart,depStart,dataParcours,isRechercheBoucle):
                         afficheLigne = afficheLigne + dataParcours[i][j]
                     print(afficheLigne)
 
-                input("Continuer...")
+                # input("Continuer...")
 
         except Exception as ex:
             if "Boucle" in ex.args[0]:
