@@ -2,7 +2,7 @@
 
 
 # Après avoir vu le temps nécessaire  pour réaliser le challenge, j'ai réfléchie et compris que je pouvais le faire avec une récursive
-# mais le temps cécessaire était toujours énnorme, en voyant les temps de réponses des meilleurs, il devait exister une methode que je ne connaissais pas.
+# mais le temps nécessaire était toujours énorme, en voyant les temps de réponses des meilleurs, il devait exister une methode que je ne connaissais pas.
 # L'ajout de cache à la fonction est magique.
 
 # Les challenges contiennent des données pour comprendre et tester notre algo.
