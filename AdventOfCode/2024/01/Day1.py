@@ -81,8 +81,8 @@ else:
     # colonne de droite. Je multiplie le valeur par le nombre de fois ou je l'ai trouvé puis je rajoute ce résultat
     # dans la somme global.
 
-    # Pour l'affiche je vais utiliser le numéro de ligne, j'utilise donc un for i in range...
-    # Je pourrais utiliser remplacer par la ligne suivante :
+    # Pour l'affichage, je vais utiliser le numéro de ligne, j'utilise donc un for i in range...
+    # Je pourrais remplacer par la ligne suivante :
     # for leftNumber in jeuTest1:
     for i in range(len(jeuTest1)):
         leftNumber = jeuTest1[i]

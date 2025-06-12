@@ -27,9 +27,6 @@ for ligne in lignes:
                 print("digit1 ",ligne[i]," : ",i)
                 break
 
-
-
-
         find1 = ligne.find("one")
         print("find one : ",find1)
         if find1 > -1 and find1 < indexDigit1:

@@ -268,6 +268,7 @@ for region in regions:
                 regionrec[2][1] = regionrec[2][1] + region[2][1]
                 print(f"   Trouvé {regionrec[0]} old : {regionrec[2][1]-region[2][1]} newfence : {regionrec[2][1]}")
 
+
 print(f"\nRésultat du challenge partie 1 : {sum(region[2][0] * len(region[1]) for region in regions)}")
 print(f"\nRésultat du challenge partie 2 : {sum(region[2][1] * len(region[1]) for region in regions)}")
 
